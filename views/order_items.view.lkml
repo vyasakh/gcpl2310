@@ -38,4 +38,26 @@ view: order_items {
     type: count
     drill_fields: [id, orders.id, inventory_items.id]
   }
+  parameter: date_granularity {
+    type: unquoted
+    allowed_value: {
+      label: "Break down by Day"
+      value: "date"
+    }
+    allowed_value: {
+      label: "Break down by Month"
+      value: "month"
+    }
+  }
+
+  dimension: date {
+    sql:
+    {% if date_granularity._parameter_value == 'date' %}
+      ${returned_date}
+    {% elsif date_granularity._parameter_value == 'month' %}
+      ${returned_month}
+    {% else %}
+      ${returned_date}
+    {% endif %};;
+  }
 }
