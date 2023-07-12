@@ -41,21 +41,27 @@ view: order_items {
   parameter: date_granularity {
     type: unquoted
     allowed_value: {
-      label: "Break down by Day"
-      value: "date"
+      label: "weekly"
+      value: "week"
     }
     allowed_value: {
-      label: "Break down by Month"
+      label: "monthly"
       value: "month"
+    }
+    allowed_value: {
+      label: "yearly"
+      value: "year"
     }
   }
 
   dimension: date {
     sql:
-    {% if date_granularity._parameter_value == 'date' %}
-      ${returned_date}
+    {% if date_granularity._parameter_value == 'week' %}
+      ${returned_week}
     {% elsif date_granularity._parameter_value == 'month' %}
       ${returned_month}
+    {% elsif date_granularity._parameter_value == 'year' %}
+      ${returned_year}
     {% else %}
       ${returned_date}
     {% endif %};;
