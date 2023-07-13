@@ -1,20 +1,20 @@
 connection: "thelook"
-
+include: "/pagination.view.lkml"
+include: "/pagination.dashboard.lookml"
 # include all the views
-include: "/views/**/*.view.lkml"
 
+include: "/views/**/*.view.lkml"
 datagroup: 0_vysakh_thelook_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
+   sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
 }
-
 datagroup: schedule_check_2{
   sql_trigger: SELECT mod(case when current_date < [second thursday of current month] THEN
                current_month_num ELSE when EXTRACT(HOUR FROM CURRENT_TIMESTAMP) = 7 then
                current_month_num + 1 else current_month END, 12) ;;
 }
 
-persist_with: 0_vysakh_thelook_default_datagroup
+#persist_with: 0_vysakh_thelook_default_datagroup
 
 explore: account {}
 
@@ -27,7 +27,9 @@ explore: events {
     relationship: many_to_one
   }
 }
-
+explore: pagination {
+#persist_with: 0_vysakh_thelook_default_datagroup
+}
 
 
 explore: flights {}
@@ -91,4 +93,9 @@ explore: salary {
 }
 
 
-explore: users {}
+#explore: users {
+  #access_filter: {
+   # field: city
+    #user_attribute: new1
+  #}
+#}
