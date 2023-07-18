@@ -17,6 +17,11 @@ view: orders {
     sql: ${TABLE}.status ;;
   }
 
+  dimension: test {
+    type: string
+    label: "Event ID title"
+    sql: concat(${id}, '-' , ${status}) ;;
+  }
 
   dimension: user_id {
     type: number
