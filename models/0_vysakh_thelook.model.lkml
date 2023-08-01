@@ -14,11 +14,27 @@ include: "/order.explore.lkml"
  # max_cache_age: "1 hour"
 #}
 # explore: testing {}
+datagroup:  dpr{
+  sql_trigger: mod(case when current_date < 02/08/2023 THEN current_month_num ELSE current_month_num + 1 END, 12) ;;
+}
 explore: sql_runner_query {}
 fiscal_month_offset: -6
 #test2
 
 # i have been changing this can you check
+
+# test: historic_revenue_is_accurate {
+#   explore_source: orders {
+#     column: total_revenue {
+#       field: orders.id
+#     }
+#     filters: [orders.created_date: "2019"]
+#   }
+#   assert: revenue_is_expected_value {
+#     expression: round(${orders.id},0) >= 73 AND round(${orders.id},0) <= 100;;
+#   }
+# }
+
 
 week_start_day: sunday
 access_grant: One {
