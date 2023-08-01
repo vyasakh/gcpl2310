@@ -15,9 +15,12 @@ include: "/order.explore.lkml"
 #}
 # explore: testing {}
 datagroup:  dpr{
-  sql_trigger: MODE(case when current_date < '2023-08-02' THEN 1 ELSE 2 + 1 END, 12) ;;
+  sql_trigger: MOD(case when current_date < '2023-08-02' THEN 1 ELSE 2 + 1 END, 12) ;;
 }
+
+
 explore: sql_runner_query {}
+
 fiscal_month_offset: -6
 #test2
 

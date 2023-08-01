@@ -177,7 +177,7 @@ measure: drill_test {
     type: number
     # hidden: yes
     sql: ${TABLE}.user_id ;;
-    drill_fields: [id,drill_test,test]
+    drill_fields: [id,test]
   }
   measure: count {
     type: count
