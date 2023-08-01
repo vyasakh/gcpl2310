@@ -1,7 +1,8 @@
 connection: "thelook"
 
 # include all the views
-include: "/views/**/*.view.lkml"
+include: "/imported_views/**/*.view.lkml"
+include: "/**/*.dashboard"
 
 datagroup: 0_vysakh_thelook_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -46,6 +47,8 @@ persist_with: 0_vysakh_thelook_default_datagroup
 
 explore: account {}
 
+explore: sql_runner_query {}
+
 explore: employees {}
 
 explore: events {
@@ -75,7 +78,10 @@ explore: inventory_items {
 }
 
 explore: orders {
-  join: users {
+  #always_filter: {
+   # filters: [orders.status: "%complete%", orders.user_id: "2"]
+  #}
+    join: users {
     type: left_outer
     sql_on: ${orders.user_id} = ${users.id} ;;
     relationship: many_to_one
@@ -83,6 +89,21 @@ explore: orders {
 }
 
 explore: order_items {
+# Place in `0_vysakh_thelook` model
+    #aggregate_table: rollup__orders_status__returned_date__sale_price {
+     # query: {
+      #  dimensions: [orders.status, returned_date, sale_price]
+       # measures: [avg, count]
+        #filters: [orders.status: "complete"]
+       #timezone: "UTC"
+      #}
+
+      #materialization: {
+       # datagroup_trigger: 0_vysakh_thelook_default_datagroup
+      #}
+    #}
+
+
   join: orders {
     type: left_outer
     sql_on: ${order_items.order_id} = ${orders.id} ;;
@@ -112,7 +133,9 @@ explore: order_items {
 explore: persons {}
 
 
-explore: products {}
+explore: products {
+  label: "@{schema} Products"
+}
 
 explore: salary {
   join: dept {

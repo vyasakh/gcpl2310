@@ -11,6 +11,19 @@ view: users {
     type: number
     sql: ${TABLE}.age ;;
   }
+
+  dimension: age_tier {
+    type: tier
+    tiers: [0, 10, 20, 30, 40, 50, 60, 70, 80]
+    style: classic
+    sql: ${age} ;;
+  }
+
+  measure: Percent_of_column{
+    type: percent_of_total
+    sql: ${age} ;;
+   # value_format: "0\%"
+  }
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;

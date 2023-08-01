@@ -1,5 +1,5 @@
 view: products {
-  sql_table_name: demo_db.products ;;
+  sql_table_name: @{schema}.products ;;
   drill_fields: [id]
 
   dimension: id {
@@ -30,6 +30,10 @@ view: products {
   dimension: retail_price {
     type: number
     sql: ${TABLE}.retail_price ;;
+  }
+  measure: avg_price {
+    type: average
+    sql: ${rank} ;;
   }
   dimension: sku {
     type: string
