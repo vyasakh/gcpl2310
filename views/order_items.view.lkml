@@ -1,12 +1,18 @@
 view: order_items {
   sql_table_name: demo_db.order_items ;;
   drill_fields: [id]
+  filter: test_filter {
+    type: date
+  }
 
   dimension: id {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
   }
+
+  ##test
+
   dimension: inventory_item_id {
     type: number
     # hidden: yes
@@ -34,10 +40,19 @@ view: order_items {
     type: number
     sql: ${TABLE}.sale_price ;;
 
+    html:  <font color="green">{{ value }}</font> ;;
+
+
   }
   dimension: mtd {
     type: yesno
     sql: ${phone} ;;
+  }
+  ###
+
+  dimension: apply_target_color {
+    type: yesno
+
   }
 
   measure: sale {
@@ -51,6 +66,14 @@ measure: test_minus_to_zero {
     type: count
     drill_fields: [id, orders.id, inventory_items.id]
   }
+  measure: minus_values{
+    type: number
+    sql: ${count}-400 ;;
+  }
+  measure: minus_to_zero {
+    type: number
+    sql: Case when ${minus_values}<0 THEN 0 ELSE ${minus_values} end ;;
+    }
   measure: avg {
     type: average
     sql: ${sale_price} ;;
@@ -58,5 +81,14 @@ measure: test_minus_to_zero {
   measure: avg2 {
     type: average
     sql: 6.951856132427851E+20 ;;
+  }
+  measure: peace {
+    type: number
+    sql: ${id} ;;
+
+  }
+  measure: less {
+    type: number
+    sql: ${order_id} ;;
   }
 }

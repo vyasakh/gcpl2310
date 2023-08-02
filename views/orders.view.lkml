@@ -9,9 +9,49 @@ view: orders {
 
 
   }
+
+  dimension: idtest {
+
+    type: number
+    sql: ${TABLE}.id ;;
+    html:
+
+    <a href="https://gcpl236.cloud.looker.com/dashboards/168?ID={{_filters['id']}}">{{rendered_value}} <a/>;;
+
+  }
+  dimension: idtestdupe {
+
+    type: number
+    sql: ${TABLE}.id ;;
+    drill_fields: [id,drill_test,test]
+  }
+
+
+  dimension: format {
+    type: number
+    sql: 4667570.99+0 ;;
+    value_format: "0.000,,\" K\""
+
+
+  }
+  dimension: formatsum {
+    type: number
+    sql: ${format}
+    ;;
+    value_format: "#.##0,\" K\""
+  }
+
+  dimension: until_today {
+    type: yesno
+    sql: ${created_day_of_week_index} +1 <= dayofweek(current_date()) AND ${created_day_of_week_index} >= 0 ;;
+
+  }
+
+
+
   dimension_group: created {
     type: time
-    timeframes: [raw,time, date, week, month, quarter, year]
+    timeframes: [raw,time, date, week, month, quarter, year,day_of_year,day_of_week,day_of_week_index]
     sql: ${TABLE}.created_at ;;
   }
   dimension: test {
@@ -26,6 +66,73 @@ view: orders {
       label: "tarun test"
       url: "https://gcpl2310.cloud.looker.com/dashboards/167"
     }
+  }
+
+
+  parameter: param {
+    type: string
+    allowed_value: {
+      value: "Drishya"
+    }
+    allowed_value: {
+      value: "Vinay"
+    }
+    allowed_value: {
+      value: "Vysakh"
+    }
+  }
+
+
+
+  dimension: title_test {
+    label: "Title_Test"
+    sql: 1 ;;
+    type: string
+    html: <h1>{% case param._parameter_value %}
+          {% when "'Drishya'" %}DRISHYA
+          {% when "'Vinay'" %}VINAY
+          {% when "'Vysakh'" %}VYSAKH
+          {% else %}End Case
+        {% endcase %} by Pokemon</h1>;;
+  }
+
+  parameter: param2 {
+    type: unquoted
+    # allowed_value: {
+    #   value: "Drishya"
+    # }
+    # allowed_value: {
+    #   value: "Vinay"
+    # }
+    # allowed_value: {
+    #   value: "Vysakh"
+    # }
+  }
+
+  dimension: title_test_dupe {
+    label: "Title_Test_dupe"
+    sql: 1 ;;
+    type: string
+    html: <h1>{% case param2._parameter_value %}
+          {% when 'Drishya' %}DRISHYA
+          {% when 'Vinay' %}VINAY
+          {% when 'Vysakh' %}VYSAKH
+          {% else %}End Case
+        {% endcase %} by Pokemon</h1>;;
+  }
+
+  dimension: title_test2 {
+    label: "Title_Test2"
+    sql: 1 ;;
+    type: string
+
+    html: {% if param._parameter_value=='Drishya' %}
+          <h1>DRISHYA</h1>
+          {% elsif param._parameter_value=='Vinay' %}VINAY
+          {%  elsif param._parameter_value=='Vysakh' %}VYSAKH
+          {% else %}<h1>End Case</h1>
+        {% endif %} <h1>by Pokemon</h1>;;
+
   }
 
   parameter: method {
@@ -52,7 +159,13 @@ view: orders {
  measure: sum {
   type:sum
    sql:   ${id};;
+
  }
+measure: drill_test {
+  type: sum_distinct
+  value_format_name: eur
+  sql: id-200000000 ;;
+}
   # measure: aggregate {
   #   sql:
   #   {% if method._parameter_value == 'sum' %}
@@ -69,11 +182,12 @@ view: orders {
     type: number
     # hidden: yes
     sql: ${TABLE}.user_id ;;
+    drill_fields: [id,test]
   }
   measure: count {
     type: count
     filters: [status: "cancelled"]
-    drill_fields: [detail*]
+    #drill_fields: [detail*]
   }
 
   measure: count_of_users{
@@ -103,6 +217,13 @@ view: orders {
           {% else %}
           <a style="color: black">{{rendered_value}}</a>
           {% endif %} ;;
+  }
+
+
+
+  measure: list {
+    type: list
+    list_field: status
   }
 
   # ----- Sets of fields for drilling ------
