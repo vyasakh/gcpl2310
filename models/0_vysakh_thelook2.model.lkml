@@ -2,44 +2,19 @@ connection: "thelook"
 
 # include all the views
 include: "/views/**/*.view.lkml"
-
-
-include: "/totals.view.lkml"
-#include: "/testing.view.lkml"
-include: "/order.explore.lkml"
-
-
-#datagroup: 0_vysakh_thelook_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM users;;
- # max_cache_age: "1 hour"
-#}
-# explore: testing {}
-datagroup:  dpr{
-  sql_trigger: select MOD(case when current_date < '2023-08-02' THEN 1 ELSE 2 + 1 END, 12) from demodb.users;;
+include: "/views/account.view.lkml"
+include: "/de/ch2.dashboard.lookml"
+#include: "/sql_runner_query.view.lkml"
+datagroup: 0_vysakh_thelook_default_datagroup {
+  # sql_trigger: SELECT MAX(id) FROM etl_log;;
+  max_cache_age: "1 hour"
 }
-
-
 explore: sql_runner_query {}
+#test24678
 
-fiscal_month_offset: -6
-#test2
+# test
+#hello
 
-# i have been changing this can you check
-
-# test: historic_revenue_is_accurate {
-#   explore_source: orders {
-#     column: total_revenue {
-#       field: orders.id
-#     }
-#     filters: [orders.created_date: "2019"]
-#   }
-#   assert: revenue_is_expected_value {
-#     expression: round(${orders.id},0) >= 73 AND round(${orders.id},0) <= 100;;
-#   }
-# }
-
-
-week_start_day: sunday
 access_grant: One {
   user_attribute: grant
   allowed_values: ["1"]
@@ -71,12 +46,9 @@ access_grant: four {
 #   END);;
 # }
 
-#persist_with: 0_vysakh_thelook_default_datagroup
-
+persist_with: 0_vysakh_thelook_default_datagroup
 
 explore: account {}
-explore: totals {}
-
 
 explore: employees {}
 
@@ -115,6 +87,12 @@ explore: orders {
 }
 
 explore: order_items {
+  conditionally_filter: {
+
+    unless: [order_items.mtd]
+
+
+  }
   join: orders {
     type: left_outer
     sql_on: ${order_items.order_id} = ${orders.id} ;;

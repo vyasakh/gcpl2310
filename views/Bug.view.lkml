@@ -11,14 +11,14 @@
       drill_fields: [detail*]
     }
 
-    dimension: current_date {
+    dimension: current_date2 {
       type: date
       sql: ${TABLE}.`current_date()` ;;
     }
 
     set: detail {
       fields: [
-        current_date
+        current_date2
       ]
     }
   }
