@@ -164,8 +164,15 @@ view: orders {
 measure: drill_test {
   type: sum_distinct
   value_format_name: eur
-  sql: id-200000000 ;;
+   sql: id-200000000 ;;
+
 }
+  measure: drill_test2 {
+    type: sum_distinct
+    value_format_name: eur
+
+    sql: ${id}-3000 ;;
+  }
   # measure: aggregate {
   #   sql:
   #   {% if method._parameter_value == 'sum' %}
