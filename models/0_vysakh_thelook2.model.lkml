@@ -4,6 +4,7 @@ connection: "thelook"
 include: "/views/**/*.view.lkml"
 include: "/views/account.view.lkml"
 include: "/de/ch2.dashboard.lookml"
+include: "/sub_test.view.lkml"
 #include: "/sql_runner_query.view.lkml"
 datagroup: 0_vysakh_thelook_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -52,6 +53,15 @@ access_grant: four {
 # }
 
 persist_with: 0_vysakh_thelook_default_datagroup
+
+explore: sub_test {
+  always_filter: {
+    filters: [
+      status: "complete"
+
+    ]
+  }
+}
 
 explore: account {}
 
