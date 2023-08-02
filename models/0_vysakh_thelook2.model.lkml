@@ -10,7 +10,8 @@ datagroup: 0_vysakh_thelook_default_datagroup {
   max_cache_age: "1 hour"
 }
 datagroup: dpr {
-  sql_trigger: select MOD(case when current_date < '2023-08-02' THEN 1 ELSE 2 + 1 END, 12) from demo_db.users ;;
+  sql_trigger: select MOD(case when current_date < '2023-08-03' THEN 1 ELSE 2 + 1 END, 12) from demo_db.users ;;
+
 }
 
 explore: sql_runner_query {}
