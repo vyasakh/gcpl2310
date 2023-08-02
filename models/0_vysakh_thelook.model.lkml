@@ -15,7 +15,7 @@ include: "/order.explore.lkml"
 #}
 # explore: testing {}
 datagroup:  dpr{
-  sql_trigger: MOD(case when current_date < '2023-08-02' THEN 1 ELSE 2 + 1 END, 12) ;;
+  sql_trigger: select MOD(case when current_date < '2023-08-02' THEN 1 ELSE 2 + 1 END, 12) from demodb.users;;
 }
 
 
