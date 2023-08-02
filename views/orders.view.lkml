@@ -21,6 +21,11 @@ view: orders {
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
+
+    link: {
+      label: "tarun test"
+      url: "https://gcpl2310.cloud.looker.com/dashboards/167"
+    }
   }
 
   parameter: method {
