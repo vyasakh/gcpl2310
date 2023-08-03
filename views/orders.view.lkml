@@ -164,14 +164,17 @@ view: orders {
 measure: drill_test {
   type: sum_distinct
   value_format_name: eur
-   sql: id-200000000 ;;
+  sql: tree-2000 ;;
 
 }
+measure: tree {
+  sql: id*100 ;;
+}
   measure: drill_test2 {
-    type: sum_distinct
+    type: number
     value_format_name: eur
 
-    sql: ${id}-3000 ;;
+    sql: ${tree} - 90000000 ;;
   }
   # measure: aggregate {
   #   sql:
