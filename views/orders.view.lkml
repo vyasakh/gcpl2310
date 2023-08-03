@@ -174,7 +174,7 @@ measure: tree {
     type: number
     value_format_name: eur
 
-    sql: ${tree} - 90000000 ;;
+    sql: ${tree} - 9000 ;;
   }
   # measure: aggregate {
   #   sql:
