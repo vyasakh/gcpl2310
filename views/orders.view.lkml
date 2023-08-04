@@ -5,8 +5,17 @@ view: orders {
   dimension: id {
     primary_key: yes
     type: number
-    sql: ${TABLE}.id ;;
+   sql: ${TABLE}.id ;;
   }
+#     case: {
+#     when: {
+#       sql: ${TABLE}.id = 39 ;;
+#       label: "yes"
+#     }
+#     else: "no"
+#   }
+# }
+
   dimension_group: created {
     label: "created"
     type: time
