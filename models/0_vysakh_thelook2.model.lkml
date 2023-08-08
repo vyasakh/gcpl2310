@@ -4,11 +4,20 @@ include: "/Label.dashboard.lookml"
 include: "/views/**/*.view.lkml"
 include: "/views/account.view.lkml"
 include: "/de/ch2.dashboard.lookml"
+include: "/sub_test.view.lkml"
 #include: "/sql_runner_query.view.lkml"
 datagroup: 0_vysakh_thelook_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
 }
+datagroup: dpr {
+  sql_trigger: select MOD(case when current_date < '2023-08-03' THEN 1 ELSE 2 + 1 END, 12) from demo_db.users ;;
+
+}
+datagroup: cd {
+  sql_trigger: select current_date ;;
+}
+
 explore: sql_runner_query {}
 #test24678
 
@@ -47,6 +56,15 @@ access_grant: four {
 # }
 
 persist_with: 0_vysakh_thelook_default_datagroup
+
+explore: sub_test {
+  always_filter: {
+    filters: [
+      status: "complete"
+
+    ]
+  }
+}
 
 explore: account {}
 

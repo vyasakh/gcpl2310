@@ -164,8 +164,18 @@ view: orders {
 measure: drill_test {
   type: sum_distinct
   value_format_name: eur
-  sql: id-200000000 ;;
+  sql: tree-2000 ;;
+
 }
+measure: tree {
+  sql: id*100 ;;
+}
+  measure: drill_test2 {
+    type: number
+    value_format_name: eur
+
+    sql: ${tree} - 9000 ;;
+  }
   # measure: aggregate {
   #   sql:
   #   {% if method._parameter_value == 'sum' %}
