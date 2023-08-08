@@ -1,5 +1,5 @@
 connection: "thelook"
-
+include: "/Label.dashboard.lookml"
 # include all the views
 include: "/views/**/*.view.lkml"
 include: "/views/account.view.lkml"
