@@ -2,7 +2,8 @@ view: latest_dates {
 
 
     derived_table: {
-      sql: select  returned_at, id  from demo_db.order_items where returned_at >= DATE_SUB(CURRENT_DATE, INTERVAL 2000 DAY) ;;
+      sql: select  returned_at, id
+      from demo_db.order_items where returned_at >= (select max(returned_at) - INTERVAL 7 DAY from demo_db.order_items ) ;;
       }
 
     dimension: returned_at {
@@ -14,5 +15,6 @@ view: latest_dates {
       type: number
       sql: ${TABLE}.id ;;
     }
+
 
 }

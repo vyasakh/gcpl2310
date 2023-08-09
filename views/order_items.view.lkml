@@ -98,10 +98,13 @@ measure: test_minus_to_zero {
     filters: [returned_date: "3000 days"]
   }
 
-
+  measure: mx {
+    type: date
+    sql: max(${returned_date} );;
+  }
   dimension: latest {
     type: yesno
-    sql: ${order_items.returned_date} >= DATE_SUB(CURRENT_DATE, INTERVAL 2000 DAY)  ;;
+    sql: ${order_items.returned_date} >= (select max(${returned_date}) - INTERVAL 7 DAY from demo_db.order_items)  ;;
 
   }
 }
