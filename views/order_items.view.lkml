@@ -91,4 +91,11 @@ measure: test_minus_to_zero {
     type: number
     sql: ${order_id} ;;
   }
+
+  measure: test {
+    type: number
+    sql: ${count}/${orders.count} ;;
+    value_format_name: percent_1
+
+  }
 }

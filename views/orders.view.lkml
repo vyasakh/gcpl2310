@@ -155,6 +155,7 @@ view: orders {
     type: count_distinct
     sql: ${id} ;;
   }
+
   measure: htmllink {
     type: number
     sql: ${id}/4 ;;
