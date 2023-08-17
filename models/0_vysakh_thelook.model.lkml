@@ -56,6 +56,11 @@ explore: events {
   }
 }
 
+explore: test_pdt {
+  # persist_for: "0 hours"
+}
+
+explore: smartdrive {}
 
 
 explore: flights {
