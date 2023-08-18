@@ -35,6 +35,7 @@ view: order_items {
     type: time
     timeframes: [raw, time, date, week, month, quarter, year ,day_of_week,month_name,month_num]
     sql: ${TABLE}.returned_at ;;
+    convert_tz: no
   }
   dimension: sale_price {
     type: number
@@ -91,5 +92,20 @@ measure: test_minus_to_zero {
   measure: less {
     type: number
     sql: ${order_id} ;;
+  }
+  measure: dupe_avg {
+    type: average
+    sql: ${sale_price} ;;
+    filters: [returned_date: "3000 days"]
+  }
+
+  measure: mx {
+    type: date
+    sql: max(${returned_date} );;
+  }
+  dimension: latest {
+    type: yesno
+    sql: ${order_items.returned_date} >= (select max(${returned_date}) - INTERVAL 7 DAY from demo_db.order_items)  ;;
+
   }
 }

@@ -5,6 +5,7 @@ include: "/views/**/*.view.lkml"
 include: "/views/account.view.lkml"
 include: "/de/ch2.dashboard.lookml"
 include: "/sub_test.view.lkml"
+
 #include: "/sql_runner_query.view.lkml"
 datagroup: 0_vysakh_thelook_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -18,11 +19,7 @@ datagroup: cd {
   sql_trigger: select current_date ;;
 }
 
-explore: sql_runner_query {}
-#test24678
 
-# test
-#hello
 
 access_grant: One {
   user_attribute: grant
@@ -75,6 +72,11 @@ explore: events {
     type: left_outer
     sql_on: ${events.user_id} = ${users.id} ;;
     relationship: many_to_one
+  }
+  join: order_items {
+    from: order_items
+    relationship: many_to_many
+    sql: ${events.id}=${order_items.id} ;;
   }
 }
 
