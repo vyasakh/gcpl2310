@@ -40,7 +40,7 @@ view: order_items {
     type: number
     sql: ${TABLE}.sale_price ;;
 
-    html:  <font color="green">{{ value }}</font> ;;
+    #html:  <font color="green">{{ value }}</font> ;;
 
 
   }
@@ -59,6 +59,7 @@ view: order_items {
     type: number
     sql: ${sale_price} ;;
   }
+
 measure: test_minus_to_zero {
   sql: case when ${sale}<0 THEN 0 ELSE ${sale} END ;;
 }
