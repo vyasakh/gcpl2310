@@ -46,8 +46,16 @@ view: orders {
     sql: ${created_day_of_week_index} +1 <= dayofweek(current_date()) AND ${created_day_of_week_index} >= 0 ;;
 
   }
+  filter: d_a {
+    type: date
+    sql: ${created_raw}
 
-
+;;
+  }
+  dimension: di {
+    type: date
+    sql: ${d_a} ;;
+  }
 
   dimension_group: created {
     type: time

@@ -7,4 +7,5 @@ view: work_unit {
     type: number
     sql: ${TABLE}.id ;;
   }
+
   }
