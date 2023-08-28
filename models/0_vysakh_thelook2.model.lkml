@@ -5,7 +5,7 @@ include: "/views/**/*.view.lkml"
 include: "/views/account.view.lkml"
 include: "/de/ch2.dashboard.lookml"
 include: "/sub_test.view.lkml"
-include: "/Latest_dates.view.lkml"
+
 #include: "/sql_runner_query.view.lkml"
 datagroup: 0_vysakh_thelook_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -19,18 +19,7 @@ datagroup: cd {
   sql_trigger: select current_date ;;
 }
 
-explore: sql_runner_query {}
-explore: latest_dates {
-  # join: order_items {
-  #   type: left_outer
-  #   relationship: one_to_one
-  #   sql: ${latest_dates.returned_date}=${order_items.returned_date} ;;
-  # }
-}
-#test24678
 
-# test
-#hello
 
 access_grant: One {
   user_attribute: grant
