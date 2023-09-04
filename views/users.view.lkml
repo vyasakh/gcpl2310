@@ -42,6 +42,11 @@ view: users {
     timeframes: [raw, time, date, week, month, quarter, year,fiscal_year,fiscal_quarter,day_of_year]
     sql: ${TABLE}.created_at ;;
   }
+  dimension_group: created_dupe {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year,fiscal_year,fiscal_quarter,day_of_year]
+    sql: ${TABLE}.created_at ;;
+  }
 
   dimension: create_day_of_fiscal_year {
     type: number
