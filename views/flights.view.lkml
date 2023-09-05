@@ -28,6 +28,16 @@ view: flights {
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.dep_time ;;
   }
+  dimension: date_diff {
+    type: number
+    sql: datediff(${arr_date},${dep_date}) ;;
+  }
+  dimension_group: duration {
+    type: duration
+    intervals: [day]
+    sql_start: ${arr_date} ;;
+    sql_end: ${dep_date} ;;
+  }
   dimension: destination {
     type: string
     sql: ${TABLE}.destination ;;
