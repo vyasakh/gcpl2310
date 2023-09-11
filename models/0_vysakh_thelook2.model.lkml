@@ -83,9 +83,7 @@ explore: events {
 explore: pagination {}
 
 explore: flights {
-  always_filter: {
-    filters: [flights.arr_date: ""]
-  }
+
 }
 
 
