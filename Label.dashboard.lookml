@@ -54,16 +54,16 @@
     col: 0
     width: 24
     height: 12
-  filters:
-  - name: Returned Year
-    title: Returned Year
-    type: field_filter
-    default_value: 18 years
-    allow_multiple_values: true
-    required: false
-    ui_config:
-      type: advanced
-      display: popover
+  # filters:
+  # - name: Returned Year
+  #   title: Returned Year
+  #   type: field_filter
+  #   default_value: 18 years
+  #   allow_multiple_values: true
+  #   required: false
+  #   ui_config:
+  #     type: advanced
+  #     display: popover
     model: 0_vysakh_thelook
     explore: order_items
     listens_to_filters: []
