@@ -30,6 +30,27 @@ view: users {
 
   }
 
+  dimension: countylo {
+
+    type: string
+    map_layer_name: us_counties_fips
+    sql: ${city} ;;
+  }
+
+  dimension: statelo {
+
+    type: string
+    map_layer_name: us_states
+    sql: ${state} ;;
+  }
+
+  dimension: citylo {
+
+    type: string
+    map_layer_name: us_counties_fips
+    sql: ${zip} ;;
+  }
+
   dimension: country_access {
     type: string
     map_layer_name: countries

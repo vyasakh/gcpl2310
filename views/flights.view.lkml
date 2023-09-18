@@ -78,6 +78,46 @@ view: flights {
     type: number
     sql: ${TABLE}.taxi_out ;;
   }
+  dimension: text {
+    type: string
+    sql: "see html You can use html and some liquid to format text to appear on multiple lines. T
+    his can be useful if you have a dimension that has really long strings as values and you want to see the text on multiple lines in a single value visualization. Note, not all visualization types support this. Some ignore the html formatting.
+
+Here is some code that will put a new line after every two words." ;;
+  }
+  dimension: formatted_text {
+    type: string
+    sql: ${text} ;;
+    # html: {% assign words = {{value}} | split: '- ' %}
+    # {% assign n = 0 %}
+    # {% for word in words %}
+    #   {% if n==0 %} <p> {{word}} </p>
+    #     {% else %} <li> {{ word }} </li>
+    #   {% endif % }
+    # {% assign n=1 %}
+    # {% endfor %};;
+    html: |
+    {% assign sentences = value | split: '. ' %}
+    {% assign s=0 %}
+    {% for sentence in sentences %}
+
+      {% assign words = sentence | split: ' ' %}
+      {% for word in words %}
+
+        {{ word }}{% unless forloop.last %} {% endunless %}
+      {% endfor %}
+
+       <br>
+        {% if s ==0 %}
+        <li>
+        {% endif %}
+        {% assign s = s | plus : 1 %}
+
+      {% unless forloop.last %}
+      {% endunless %}
+
+    {% endfor %};;
+  }
   measure: count {
     type: count
   }
