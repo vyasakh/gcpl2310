@@ -27,6 +27,13 @@ view: products {
     type: number
     sql: ${TABLE}.rank ;;
   }
+
+  dimension: departmentdupe {
+    type: string
+    sql: concat("gfhhdjdjkskskskskskskslkalaalalalwertrtrtrrttttytytytyty",${department}) ;;
+    html:
+      <div style= "word-wrap: break-word; width: 5px;">{{rendered_value}}</div> ;;
+  }
   dimension: retail_price {
     type: number
     sql: ${TABLE}.retail_price ;;

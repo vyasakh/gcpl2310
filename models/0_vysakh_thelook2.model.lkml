@@ -5,6 +5,7 @@ include: "/views/**/*.view.lkml"
 include: "/views/account.view.lkml"
 include: "/de/ch2.dashboard.lookml"
 include: "/sub_test.view.lkml"
+include: "/Test.dashboard.lookml"
 
 #include: "/sql_runner_query.view.lkml"
 datagroup: 0_vysakh_thelook_default_datagroup {
