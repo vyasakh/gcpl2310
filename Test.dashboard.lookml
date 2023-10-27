@@ -47,7 +47,7 @@
     minimum_column_width: 75
     series_cell_visualizations:
       orders.count:
-        is_active: true
+        is_active: false
     truncate_column_names: false
     defaults_version: 1
     y_axes: []
